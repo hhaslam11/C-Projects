@@ -14,22 +14,26 @@ int checkIfWin(char[SIZE][SIZE]);
 void drawBoard(char[][SIZE]);
 int main(){
 
-	int neededToWin = SIZE; //How much in a row user needs in order win
 	int move = 0;
-	int place = 0;
+	int place = 1;
 
 	//Create board
 	char board[SIZE][SIZE];
-	int key[SIZE];//
+	int placeCol[SIZE * SIZE];
+	int placeRow[SIZE * SIZE];
+	int counter = 1;
 
-	for(int y = 0; y < SIZE; y++){
-			for(int x = 0; x < SIZE; x++){
-				board[x][y] = DEFAULT;
-				
+	for(int row = 0; row < SIZE; row++){
+			for(int col = 0; col < SIZE; col++){
+				board[col][row] = DEFAULT;
+				placeCol[counter] = col;
+				placeRow[counter] = row;
+				counter++;
 			}
 		}
 	
-	for (int i = 0; i < (SIZE * SIZE); i++){// Loop that goes until all possible moves are done.
+	int i = 0;
+	while(i < (SIZE * SIZE)){// Loop that goes until all possible moves are done.
 		
 		int uRow = 1, uCol = 1;
 		drawBoard(board);
@@ -37,24 +41,18 @@ int main(){
 		//Player 1
 		cout << "Player 1's turn!" << endl;
 		cin >> move;
-				
-		for (int row = 1; row < SIZE; row++){
-			for (int col = 1; col < SIZE; col++){
-				if (move <= 0){
-					if (board[uCol][uRow] == DEFAULT){
-						board[uCol][uRow] = PLAYER1; 
-						row = SIZE;
-						col = SIZE;
-						continue;
-					}
-				}
-				move -= 1;
-				uCol++;
-			}
-			move -= 1;
-			uCol = 1;
-			uRow++;
-		}
+		if(board[placeCol[move]][placeRow[move]] == DEFAULT)
+			board[placeCol[move]][placeRow[move]] = PLAYER1;		
+		i++;
+
+		drawBoard(board);
+
+		//Player 2
+		cout << "Player 2's turn!" << endl;
+		cin >> move;
+		if(board[placeCol[move]][placeRow[move]] == DEFAULT)
+			board[placeCol[move]][placeRow[move]] = PLAYER2;	
+		i++;
 
 		if(checkIfWin(board) != 0)
 			return 0;
