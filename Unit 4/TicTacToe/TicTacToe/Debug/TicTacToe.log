@@ -1,4 +1,4 @@
-﻿Build started 5/14/2016 3:14:58 PM.
+﻿Build started 5/14/2016 11:41:34 PM.
      1>Project "F:\Desktop\C-Projects\Unit 4\TicTacToe\TicTacToe\TicTacToe.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\TicTacToe.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -23,4 +23,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.95
+Time Elapsed 00:00:00.93

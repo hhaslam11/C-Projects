@@ -54,8 +54,16 @@ int main(){
 			board[placeCol[move]][placeRow[move]] = PLAYER2;	
 		i++;
 
-		if(checkIfWin(board) != 0)
+		if(checkIfWin(board) == 1){
+			cout << "Player 1 one!" << endl;
+			system("pause");
 			return 0;
+		}
+		if(checkIfWin(board) == 2){
+			cout << "Player 2 one!" << endl;
+			system("pause");
+			return 0;
+		}
 	}
 	cout << "It's a tie!" << endl;
 	system("pause");
@@ -63,15 +71,60 @@ int main(){
 
 }
 int checkIfWin(char board[SIZE][SIZE]){
+	
+	int player1Count = 0;//Amount of the same char in a row
+	int player2Count = 0;
+	bool continueCount1 = true;
+	bool continueCount2 = true;
+
+	for(int row = 0; row < SIZE; row++){
+			for(int col = 0; col < SIZE; col++){
+				if(board[col][row] == PLAYER1){
+					player1Count++;
+				}else if(board[col][row] == PLAYER2){
+					player2Count++;
+				}
+			}
+			if(player1Count >= SIZE)
+				return 1;
+			if(player2Count >= SIZE)
+				return 2;
+			player1Count = 0;
+			player2Count = 0;
+	}
+
+	for(int col = 0; col < SIZE; col++){
+			for(int row = 0; row < SIZE; row++){
+				if(board[col][row] == PLAYER1){
+					player1Count++;
+				}else if(board[col][row] == PLAYER2){
+					player2Count++;
+				}
+			}
+			if(player1Count >= SIZE)
+				return 1;
+			if(player2Count >= SIZE)
+				return 2;
+			player1Count = 0;
+			player2Count = 0;
+	}
+
+
+	//check diag
 
 	
 	return 0;
 }
 void drawBoard(char board[][SIZE]){
 	system("cls");
+	int counter = 1;
 	for(int y = 0; y < SIZE; y++){
-		for(int x = 0; x < SIZE; x++){
+		for(int x = 0; x < SIZE; x++)
 			cout << board[x][y];
+		cout << "     ";
+		for(int x = 0; x < SIZE; x++){
+			cout << counter;
+			counter++;
 		}
 		cout << endl;
 	}
