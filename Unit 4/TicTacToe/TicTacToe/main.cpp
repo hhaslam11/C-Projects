@@ -45,20 +45,20 @@ int main(){
 			board[placeCol[move]][placeRow[move]] = PLAYER1;		
 		i++;
 
-		drawBoard(board);
+		if(checkIfWin(board) == 1){
+			cout << "Player 1 one!" << endl;
+			system("pause");
+			return 0;
+		}
 
 		//Player 2
+		drawBoard(board);
 		cout << "Player 2's turn!" << endl;
 		cin >> move;
 		if(board[placeCol[move]][placeRow[move]] == DEFAULT)
 			board[placeCol[move]][placeRow[move]] = PLAYER2;	
 		i++;
 
-		if(checkIfWin(board) == 1){
-			cout << "Player 1 one!" << endl;
-			system("pause");
-			return 0;
-		}
 		if(checkIfWin(board) == 2){
 			cout << "Player 2 one!" << endl;
 			system("pause");
@@ -74,9 +74,8 @@ int checkIfWin(char board[SIZE][SIZE]){
 	
 	int player1Count = 0;//Amount of the same char in a row
 	int player2Count = 0;
-	bool continueCount1 = true;
-	bool continueCount2 = true;
 
+	//CHECK VERTICAL
 	for(int row = 0; row < SIZE; row++){
 			for(int col = 0; col < SIZE; col++){
 				if(board[col][row] == PLAYER1){
@@ -93,6 +92,7 @@ int checkIfWin(char board[SIZE][SIZE]){
 			player2Count = 0;
 	}
 
+	//CHECK HORIZONTAL
 	for(int col = 0; col < SIZE; col++){
 			for(int row = 0; row < SIZE; row++){
 				if(board[col][row] == PLAYER1){
@@ -109,10 +109,38 @@ int checkIfWin(char board[SIZE][SIZE]){
 			player2Count = 0;
 	}
 
+	//CHECK TOP-LEFT TO BOTTOM_RIGHT                     // ? _ _
+	for (int i = 0; i < SIZE; i++){                      // _ ? _
+		if(board[i][i] == PLAYER1)                       // _ _ ?
+			player1Count++;
+		if(board[i][i] == PLAYER2)
+			player2Count++;
+	}
+	if(player1Count >= SIZE)
+		return 1;
+	if(player2Count >= SIZE)
+		return 2;
+	player1Count = 0;
+	player2Count = 0;
 
-	//check diag
-
+	//CHECK TOP-RIGHT TO BOTTOM-LEFT                     // _ _ ?
+	int countCol = SIZE - 1;                             // _ ? _
+	int countRow = 0;                                    // ? _ _
+	for(int i = 0; i < SIZE; i++){
 	
+		if(board[countCol][countRow] == PLAYER1)
+			player1Count++;
+		if(board[countCol][countRow] == PLAYER2)
+			player2Count++;
+		
+		countCol--; 
+		countRow++;
+	}
+	if(player1Count >= SIZE)
+		return 1;
+	if(player2Count >= SIZE)
+		return 2;
+
 	return 0;
 }
 void drawBoard(char board[][SIZE]){
@@ -123,7 +151,7 @@ void drawBoard(char board[][SIZE]){
 			cout << board[x][y];
 		cout << "     ";
 		for(int x = 0; x < SIZE; x++){
-			cout << counter;
+			cout << counter << "_";
 			counter++;
 		}
 		cout << endl;
