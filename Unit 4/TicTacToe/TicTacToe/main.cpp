@@ -1,9 +1,7 @@
 #include <iostream>
-#include <string>
 using std::cin;
 using std::cout;
 using std::endl;
-using std::string;
 
 const int SIZE = 3; //rows and cols
 const char PLAYER1 = 'X';
@@ -11,7 +9,7 @@ const char PLAYER2 = 'O';
 const char DEFAULT = '_';
 
 int checkIfWin(char[SIZE][SIZE]);
-void drawBoard(char[][SIZE]);
+void drawBoard(char[SIZE][SIZE]);
 int main(){
 
 	int move = 0;
@@ -19,8 +17,8 @@ int main(){
 
 	//Create board
 	char board[SIZE][SIZE];
-	int placeCol[SIZE * SIZE];
-	int placeRow[SIZE * SIZE];
+	int placeCol[(SIZE * SIZE) + 1];
+	int placeRow[(SIZE * SIZE) + 1];
 	int counter = 1;
 
 	for(int row = 0; row < SIZE; row++){
