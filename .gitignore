@@ -28,3 +28,28 @@
 *.app
 
 *.user
+
+# VB2008
+Debug/
+ipch/
+Release/
+_UpgradeReport_Files/
+*.css
+*.ipch
+*.xslt
+*.old
+*.xml
+*.XML
+*.gif
+*.log
+*.tlog
+*.pdb
+*.htm
+*.cache
+*.rc
+*.idb
+*.dep
+*.manifest
+*.lastbuildstate
+
+
