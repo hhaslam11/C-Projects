@@ -16,8 +16,7 @@ void input(){
 
 	string position    = "";
 	string name		   = "";
-	int number		   = 0;
-	int numberOfDigits = 0;
+	int number		   = 1;
 	ofstream outFile;
 	outFile.open("employee_codes.txt");
 	if (outFile.is_open()){
@@ -32,8 +31,8 @@ void input(){
 					cin >> position;
 					cout << endl;
 					std::transform(position.begin(), position.end(), position.begin(), ::toupper);
-				}while(position != A || position != T || position != S);
-				outFile << position << "#" << number++ << "#" <<name << endl;
+				}while(position != "A" && position != "T" && position != "S");
+				outFile << position << number++ << "#" <<name << endl;
 			}
 		} while (name != "X" && name != "x");
 		outFile.close();
@@ -63,11 +62,11 @@ void readFromFile(employeeType typeToShow){
 	string number;
 
 	inFile.open("employee_codes.txt", ios::in);
+
 	if (inFile.is_open()){
+		//read next line
+		getline(inFile, line);
 		do {
-			//read next line
-			getline(inFile, line);
-			
 			//Position
 			char position = line.substr(0, 1)[0];
 			switch(position){
@@ -82,20 +81,18 @@ void readFromFile(employeeType typeToShow){
 			}
 			
 			//Number
-			//number = line.substr(2, line.substr(1, 2));
-
+			number = line.substr(1, line.find("#", 0) - 1);
+			
 			//Name
-		//	name = line.substr(line.substr(1, 2)/* + 1*/);
+			name = line.substr((line.find("#", 0) + 1));
 
 			//display
-			if(typeToShow == All){
+			if(typeToShow == inputType || typeToShow == All){
 				cout << number << "  " << name << "  " << getPosition(inputType) << endl;
-			}else{
-				if(typeToShow == inputType){
-					cout << number << "  " << name << "  " << getPosition(inputType) << endl;
-				}//if
 			}//if
 
+			//read next line
+			getline(inFile, line);
 		} while (!inFile.eof());
 		system("pause");
 		inFile.close();
@@ -144,8 +141,6 @@ int main(){
 	menu();
 	return 0;
 }
-
-
 /*
  * Employee Codes
  * Kaleb Haslam

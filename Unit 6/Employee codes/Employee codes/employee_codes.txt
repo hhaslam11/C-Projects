@@ -1,1 +1,12 @@
-Y#0#Kaleb
+A1#one
+T2#two
+S3#three
+A4#four
+T5#five
+S6#six
+A7#seven
+S8#eight
+T9#nine
+A10#ten
+T11#eleven
+S12#twelve
