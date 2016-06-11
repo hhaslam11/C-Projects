@@ -1,16 +1,20 @@
 #include <iostream>
 #include <fstream>
+#include <string>
+
 using std::cin;
 using std::cout;
 using std::endl;
+using std::string;
 using std::ifstream;
 using std::ofstream;
 using std::ios;
 
-const int size = 1000;
+const int size = 100;
+
 void writeNumbersToFile() {
 	ofstream outFile;
-	outFile.open("numbers.txt", ios::app);
+	outFile.open("numbers.txt");
 	if (outFile.is_open()) {
 		for (int i = 0; i <= size; i++) {
 			outFile << (rand() % 100 + 1) << endl;
@@ -23,20 +27,19 @@ void copyEvenNumbers() {
 	ofstream outFile;
 	ifstream inFile;
 	std::string inputString = "";
-	outFile.open("evenNumbers.txt", ios::app);
+	outFile.open("evenNumbers.txt");
 	inFile.open("numbers.txt");
 
 	for (int i = 0; i <= size; i++) {
-		inputString = inFile.getline();
-		if (/*(int)inputstring*/ % 2 = 0) {
-			outFile << //(int)inputstring
+		getline(inFile, inputString);
+		if (std::stoi(inputString) % 2 == 0) {
+			outFile << std::stoi(inputString) << endl;
 		}
 	}
-	
-	
 }
 int main() {
 	writeNumbersToFile();
+	copyEvenNumbers();
 	return 0;
 }
 /*
