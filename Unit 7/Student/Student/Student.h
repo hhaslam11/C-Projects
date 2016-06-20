@@ -1,3 +1,4 @@
+/*
 #include <math.h>
 
 class Student{
@@ -59,5 +60,5 @@ void Student::setAncestry(bool ancest){}
 bool Student::getAncestry(){
 	return this->ancestry ;
 }
-
+*/
 //Student.h
